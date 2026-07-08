@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regan Necaj | Computer Engineering Student</title>
+<meta name="description" content="Regan Necaj is a Computer Engineering student focused on Java backend development, Oracle SQL, PL/SQL, JDBC, and database-driven systems.">
+<meta name="author" content="Regan Necaj">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#16243D">
+<link rel="canonical" href="https://reganrn.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Regan Necaj | Java Backend & Oracle SQL">
+<meta property="og:description" content="Computer Engineering student building Java and Oracle database projects.">
+<meta property="og:url" content="https://reganrn.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regan Necaj | Java Backend & Oracle SQL">
+<meta name="twitter:description" content="Computer Engineering student building Java and Oracle database projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F6F2;
+    --panel:#FFFFFF;
+    --ink:#16243D;
+    --ink-soft:#4A5871;
+    --line:#D8D6CE;
+    --accent:#C74634;      /* Oracle red */
+    --accent-soft:#F3DCD7;
+    --code-bg:#101A2E;
+    --code-text:#E8EBF2;
+    --code-key:#7FB4FF;
+    --code-str:#F2A65A;
+    --code-com:#6B7A94;
+    --radius:6px;
+    --maxw:1060px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:16px;
+  }
+  ::selection{background:var(--accent);color:#fff}
+
+  /* ---------- layout helpers ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{padding:88px 0}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);display:block;margin-bottom:14px;
+  }
+  .eyebrow::before{content:"-- ";color:var(--ink-soft)} /* SQL comment marker */
+  h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.7rem,3.5vw,2.3rem);font-weight:700;margin-bottom:34px;letter-spacing:-.01em}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,246,242,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.95rem;color:var(--ink);text-decoration:none}
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:26px;list-style:none}
+  .nav-links a{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--ink-soft);text-decoration:none;transition:color .15s}
+  .nav-links a:hover,.nav-links a:focus-visible{color:var(--accent)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:110px 0 90px;border-bottom:1px solid var(--line)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(2.3rem,5vw,3.4rem);
+    font-weight:700;line-height:1.08;letter-spacing:-.02em;margin-bottom:20px;
+  }
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p.lede{color:var(--ink-soft);font-size:1.06rem;max-width:46ch;margin-bottom:30px}
+  .profile-row{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .profile-meta{
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-soft);
+  }
+  .profile-meta strong{display:block;font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--ink)}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:12px 22px;border-radius:var(--radius);
+    font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:500;
+    text-decoration:none;transition:transform .12s,box-shadow .12s;
+  }
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(22,36,61,.25)}
+  .btn-ghost{border:1.5px solid var(--ink);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:#fff}
+  .btn-disabled{opacity:.55;cursor:not-allowed;background:transparent}
+  .btn-disabled:hover{background:transparent;color:var(--ink);transform:none;box-shadow:none}
+
+  /* signature: SQL terminal */
+  .sql-card{
+    background:var(--code-bg);border-radius:10px;
+    box-shadow:0 18px 44px rgba(22,36,61,.28);
+    overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:.86rem;
+  }
+  .sql-bar{display:flex;gap:7px;padding:12px 16px;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08)}
+  .sql-bar i{width:11px;height:11px;border-radius:50%;background:#33405C;display:block}
+  .sql-bar i:first-child{background:var(--accent)}
+  .sql-body{padding:22px 22px 26px;color:var(--code-text);line-height:1.75;min-height:230px}
+  .sql-body .kw{color:var(--code-key)} .sql-body .st{color:var(--code-str)} .sql-body .cm{color:var(--code-com)}
+  .cursor{display:inline-block;width:8px;height:1.05em;background:var(--accent);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .sql-result{margin-top:14px;border-top:1px dashed rgba(255,255,255,.15);padding-top:12px;color:var(--code-com);opacity:0;transition:opacity .5s}
+  .sql-result.show{opacity:1}
+  .sql-result b{color:var(--code-str);font-weight:500}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px}
+  .about-grid p{color:var(--ink-soft);margin-bottom:16px;max-width:62ch}
+  .about-grid p strong{color:var(--ink);font-weight:600}
+  .fact-table{
+    font-family:'JetBrains Mono',monospace;font-size:.82rem;
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
+    align-self:start;
+  }
+  .fact-table div{display:flex;justify-content:space-between;gap:18px;padding:11px 16px;border-bottom:1px solid var(--line)}
+  .fact-table div:last-child{border-bottom:none}
+  .fact-table span:first-child{color:var(--ink-soft)}
+  .fact-table span:last-child{font-weight:500;text-align:right}
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .skill-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 24px;transition:border-color .15s, transform .15s;
+  }
+  .skill-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .skill-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin-bottom:6px}
+  .skill-card .lvl{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:12px}
+  .skill-card p{font-size:.9rem;color:var(--ink-soft)}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;
+    padding:4px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent);
+  }
+
+  /* ---------- projects ---------- */
+  #projects{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .proj{
+    display:grid;grid-template-columns:56px 1fr auto;gap:22px;align-items:start;
+    padding:30px 6px;border-bottom:1px solid var(--line);
+  }
+  .proj:last-of-type{border-bottom:none}
+  .proj-id{
+    font-family:'JetBrains Mono',monospace;color:var(--ink-soft);font-size:.8rem;padding-top:6px;
+  }
+  .proj h3{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;margin-bottom:6px}
+  .proj h3 .status{
+    font-family:'JetBrains Mono',monospace;font-size:.66rem;vertical-align:middle;margin-left:10px;
+    padding:3px 9px;border-radius:99px;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .status.live{background:#E4F2E7;color:#256C3A}
+  .status.wip{background:#FBEEDC;color:#9A6013}
+  .status.planned{background:#E7ECF5;color:#384C70}
+  .proj p{color:var(--ink-soft);font-size:.94rem;max-width:64ch;margin-bottom:10px}
+  .proj .stack{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--accent)}
+  .proj-link{
+    font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--ink);text-decoration:none;
+    border:1.5px solid var(--line);border-radius:var(--radius);padding:9px 16px;white-space:nowrap;
+    transition:all .15s;align-self:center;
+  }
+  .proj-link:hover{border-color:var(--accent);color:var(--accent)}
+  .proj-link.disabled{color:var(--ink-soft);background:#F2F1ED;cursor:default}
+  .proj-link.disabled:hover{border-color:var(--line);color:var(--ink-soft)}
+
+  /* ---------- education ---------- */
+  .edu{
+    background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:26px 28px;max-width:640px;
+  }
+  .edu h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem}
+  .edu .sub{color:var(--ink-soft);font-size:.92rem;margin:4px 0 12px}
+  .edu ul{list-style:none}
+  .edu li{font-size:.9rem;color:var(--ink-soft);padding:4px 0 4px 20px;position:relative}
+  .edu li::before{content:"▸";position:absolute;left:0;color:var(--accent)}
+
+  /* ---------- contact ---------- */
+  #contact{text-align:center;padding:100px 0}
+  #contact h2{margin-bottom:14px}
+  #contact p{color:var(--ink-soft);max-width:48ch;margin:0 auto 30px}
+  footer{
+    border-top:1px solid var(--line);padding:26px 0;text-align:center;
+    font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--ink-soft);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .hero-grid,.about-grid{grid-template-columns:1fr}
+    .skills-grid{grid-template-columns:1fr}
+    .proj{grid-template-columns:1fr;gap:10px}
+    .proj-id{padding-top:0}
+    .proj-link{justify-self:start}
+    .nav-links{display:none}
+    .profile-row{align-items:flex-start}
+    section{padding:64px 0}
+    header.hero{padding:70px 0 60px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto}
+    .sql-result{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#top">reganrn<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="profile-row">
+        <div class="profile-meta"><strong>Regan Necaj</strong>Computer Engineering student</div>
+      </div>
+      <h1>Backend systems,<br>built on <em>Java</em> and <em>Oracle</em>.</h1>
+      <p class="lede">I'm Regan, a Computer Engineering student at the Polytechnic University of Tirana. I build database-driven applications: clean Java, careful schemas, and business logic that lives where it belongs.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="sql-card" aria-label="Animated SQL terminal">
+      <div class="sql-bar"><i></i><i></i><i></i></div>
+      <div class="sql-body">
+        <div id="typed"></div>
+        <div class="sql-result" id="result">
+          1 row selected. <b>name: Regan Necaj · focus: Java backend + Oracle databases · status: open to internships</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <span class="eyebrow">about</span>
+      <h2>I focus on Java backend work with strong database fundamentals.</h2>
+      <p>Computer Engineering gives me a systems mindset, but my current direction is backend software: Java, relational databases, and code that protects data integrity. I care about <strong>what actually happens</strong> when an application reads, writes, validates, and commits data.</p>
+      <p>Right now I focus on the <strong>Java + Oracle</strong> ecosystem: JDBC, layered application design, and pushing business logic into <strong>PL/SQL packages</strong> where transactions and integrity are enforced closest to the data.</p>
+      <p>I'm looking for an internship or junior role where I can work on real backend systems and keep improving through practical, public projects.</p>
+    </div>
+    <div class="fact-table" aria-label="Quick facts">
+      <div><span>location</span><span>Tirana, AL</span></div>
+      <div><span>degree</span><span>3rd-year Computer Engineering</span></div>
+      <div><span>university</span><span>UPT</span></div>
+      <div><span>focus</span><span>Java · Oracle · PL/SQL</span></div>
+      <div><span>languages</span><span>Albanian · English</span></div>
+      <div><span>status</span><span style="color:#256C3A">open to internships</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <span class="eyebrow">skills</span>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Java</h3>
+        <span class="lvl">core language</span>
+        <p>OOP design, collections, exception handling, JDBC. Layered architecture with clean separation between DAO, service, and UI code.</p>
+        <div class="tags"><span class="tag">Java SE</span><span class="tag">JDBC</span><span class="tag">OOP</span></div>
+      </div>
+      <div class="skill-card">
+        <h3>Oracle SQL</h3>
+        <span class="lvl">database</span>
+        <p>Schema design, joins, subqueries, constraints, indexes. Writing queries that are correct first and fast second, then both.</p>
+        <div class="tags"><span class="tag">DDL/DML</span><span class="tag">Modeling</span><span class="tag">Transactions</span></div>
+      </div>
+      <div class="skill-card">
+        <h3>PL/SQL</h3>
+        <span class="lvl">server-side logic</span>
+        <p>Stored procedures, functions, packages, triggers, cursors, and exception handling. Business rules enforced inside the database.</p>
+        <div class="tags"><span class="tag">Procedures</span><span class="tag">Packages</span><span class="tag">Triggers</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <span class="eyebrow">projects</span>
+    <h2>Selected work</h2>
+
+    <article class="proj">
+      <div class="proj-id">P-01</div>
+      <div>
+        <h3>Library Management System <span class="status live">shipped</span></h3>
+        <p>Console application managing books, members, and loans against an Oracle database. Business logic, including member validation, loan-limit checks, atomic borrow/return, and overdue calculation, lives in PL/SQL packages called from Java via CallableStatement. Uses row locking to protect available copies and per-member loan limits under concurrency.</p>
+        <span class="stack">Java · JDBC · Oracle · PL/SQL</span>
+      </div>
+      <a class="proj-link" href="https://github.com/reganrn/library-system" target="_blank" rel="noopener noreferrer" aria-label="Open library-system source code on GitHub">source →</a>
+    </article>
+
+    <article class="proj">
+      <div class="proj-id">P-02</div>
+      <div>
+        <h3>Monochrome Bot <span class="status live">shipped</span></h3>
+        <p>Discord music bot built with Node.js and Discord.js, including queue controls, playback commands, API integration, Docker/Railway deployment files, and production deployment practice.</p>
+        <span class="stack">Node.js · Discord.js · Docker · Railway</span>
+      </div>
+      <a class="proj-link" href="https://github.com/reganrn/monochrome-bot" target="_blank" rel="noopener noreferrer" aria-label="Open monochrome-bot source code on GitHub">source →</a>
+    </article>
+
+    <article class="proj">
+      <div class="proj-id">P-03</div>
+      <div>
+        <h3>Library REST API <span class="status planned">planned</span></h3>
+        <p>The console library domain rebuilt as a Spring Boot REST API. Planned scope: REST endpoints for books, members, and loans; request validation; DTOs; global error handling; pagination/search; OpenAPI documentation; and tests.</p>
+        <span class="stack">Spring Boot · JPA · OpenAPI · Docker</span>
+      </div>
+      <span class="proj-link disabled" aria-disabled="true">planned</span>
+    </article>
+
+    <article class="proj">
+      <div class="proj-id">P-04</div>
+      <div>
+        <h3>Mini Bank System <span class="status planned">planned</span></h3>
+        <p>A database-heavy backend project planned around accounts, deposits, withdrawals, transfers, transaction history, audit tables, and consistency rules. The goal is to show SQL constraints, PL/SQL procedures, and Java service code around money-like operations.</p>
+        <span class="stack">Java · Oracle SQL · PL/SQL · Transactions</span>
+      </div>
+      <span class="proj-link disabled" aria-disabled="true">planned</span>
+    </article>
+
+    <article class="proj">
+      <div class="proj-id">P-05</div>
+      <div>
+        <h3>File Indexer in C <span class="status planned">planned</span></h3>
+        <p>A small command-line C project planned to scan directories, read text files, build a simple word index, and search indexed terms from the terminal. This will round out the portfolio with file handling, structs, pointers, and memory management.</p>
+        <span class="stack">C · Files · Structs · Memory management</span>
+      </div>
+      <span class="proj-link disabled" aria-disabled="true">planned</span>
+    </article>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <span class="eyebrow">education</span>
+    <h2>Education</h2>
+    <div class="edu">
+      <h3>BSc Computer Engineering</h3>
+      <div class="sub">Polytechnic University of Tirana, Faculty of Information Technology · 3rd-year student</div>
+      <ul>
+        <li>Data Structures & Algorithms (Java)</li>
+        <li>Object-Oriented Programming</li>
+        <li>Database Systems and SQL</li>
+        <li>Software Engineering Fundamentals</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="display:inline-block">contact</span>
+    <h2>Let's talk</h2>
+    <p>I'm open to internships and junior backend roles, on-site in Tirana or remote. The fastest way to reach me is email.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn btn-primary" href="mailto:regannecaj@gmail.com">Email</a>
+      <a class="btn btn-ghost" href="https://github.com/reganrn" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/regannecaj" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <button class="btn btn-ghost btn-disabled" type="button" disabled>Resume</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© Regan Necaj</div>
+</footer>
+
+<script>
+  // Typed SQL hero animation
+  const lines = [
+    {t:"-- portfolio_query.sql", cls:"cm", nl:true},
+    {t:"SELECT", cls:"kw"}, {t:" name, skills, drive ", cls:""},
+    {t:"FROM", cls:"kw"}, {t:" engineering_students", cls:"", nl:true},
+    {t:"WHERE", cls:"kw"}, {t:" stack ", cls:""}, {t:"IN", cls:"kw"},
+    {t:" (", cls:""}, {t:"'Java'", cls:"st"}, {t:", ", cls:""}, {t:"'Oracle'", cls:"st"}, {t:", ", cls:""}, {t:"'PL/SQL'", cls:"st"}, {t:")", cls:"", nl:true},
+    {t:"  AND", cls:"kw"}, {t:" ships_projects = ", cls:""}, {t:"'Y'", cls:"st"}, {t:";", cls:""}
+  ];
+  const typed = document.getElementById("typed");
+  const result = document.getElementById("result");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduce) {
+    lines.forEach(seg => {
+      const s = document.createElement("span");
+      if (seg.cls) s.className = seg.cls;
+      s.textContent = seg.t;
+      typed.appendChild(s);
+      if (seg.nl) typed.appendChild(document.createElement("br"));
+    });
+    result.classList.add("show");
+  } else {
+    const cur = document.createElement("span");
+    cur.className = "cursor";
+    typed.appendChild(cur);
+    let li = 0, ci = 0, span = null;
+    (function type(){
+      if (li >= lines.length) { setTimeout(()=>result.classList.add("show"), 350); return; }
+      const seg = lines[li];
+      if (!span) {
+        span = document.createElement("span");
+        if (seg.cls) span.className = seg.cls;
+        typed.insertBefore(span, cur);
+      }
+      span.textContent += seg.t[ci++];
+      if (ci >= seg.t.length) {
+        if (seg.nl) typed.insertBefore(document.createElement("br"), cur);
+        li++; ci = 0; span = null;
+      }
+      setTimeout(type, 26 + Math.random()*34);
+    })();
+  }
+</script>
+</body>
+</html>
