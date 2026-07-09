@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="Regan Necaj | Java Backend & Oracle SQL">
 <meta name="twitter:description" content="Computer Engineering student building Java and Oracle database projects.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://skillicons.dev">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -144,6 +145,15 @@
   .tag{
     font-family:'JetBrains Mono',monospace;font-size:.72rem;
     padding:4px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent);
+  }
+  .skill-icon-strip{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:-14px 0 26px}
+  .skill-icon-strip a{display:inline-flex;line-height:0}
+  .skill-icon-strip img{max-width:100%;height:auto}
+  .skill-text-badges{display:flex;flex-wrap:wrap;gap:8px}
+  .skill-text-badge{
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;
+    padding:7px 11px;border-radius:var(--radius);border:1px solid var(--line);
+    border-left:3px solid var(--accent);background:var(--panel);color:var(--ink);
   }
 
   /* ---------- projects ---------- */
@@ -278,6 +288,16 @@
   <div class="wrap">
     <span class="eyebrow">skills</span>
     <h2>What I work with</h2>
+    <div class="skill-icon-strip" aria-label="Current technical skills">
+      <a href="https://skillicons.dev" target="_blank" rel="noopener noreferrer">
+        <img src="https://skillicons.dev/icons?i=java,c,maven,git,github,vscode&theme=light" alt="Java, C, Maven, Git, GitHub, and VS Code">
+      </a>
+      <div class="skill-text-badges" aria-label="Database skills">
+        <span class="skill-text-badge">Oracle SQL</span>
+        <span class="skill-text-badge">PL/SQL</span>
+        <span class="skill-text-badge">JDBC</span>
+      </div>
+    </div>
     <div class="skills-grid">
       <div class="skill-card">
         <h3>Java</h3>
